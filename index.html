@@ -37,43 +37,6 @@ body {
   justify-content: center;
   align-items: center;
   perspective: 1800px;
-  position: relative;
-}
-
-/* 🌸 CALQUE PETALES */
-.petals {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  display: none;
-  z-index: 3;
-}
-
-.petal {
-  position: absolute;
-  width: 18px;
-  height: 26px;
-  background: linear-gradient(135deg, #f6d6d6, #e7bcbc, #f9e6cf);
-  border-radius: 60% 40% 60% 40%;
-  opacity: 0.9;
-  filter: blur(0.2px);
-  animation: fall 3.5s linear forwards;
-}
-
-/* 🍃 Animation chute */
-@keyframes fall {
-  0% {
-    transform: translateY(-50px) rotate(0deg) scale(0.8);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg) scale(1.1);
-    opacity: 0;
-  }
 }
 
 /* 💌 CARTE */
@@ -85,7 +48,6 @@ body {
   transition: transform 1s cubic-bezier(.4,.2,.2,1),
               box-shadow 0.8s ease;
   cursor: pointer;
-  z-index: 2;
 }
 
 .card.flipped {
@@ -127,8 +89,8 @@ body {
   text-decoration: none;
   border-radius: 999px;
   font-size: 0.9rem;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .buttons a:hover {
@@ -150,10 +112,6 @@ body {
 <div class="container">
   <div class="scene">
 
-    <!-- 🌸 pétales -->
-    <div class="petals" id="petals"></div>
-
-    <!-- carte -->
     <div class="card" id="card">
       <div class="face front"></div>
       <div class="face back"></div>
@@ -166,13 +124,10 @@ body {
       🏛 Cérémonie – Mairie de Colombes
     </a>
     <a href="https://www.google.com/maps/search/?api=1&query=1+rue+Marcel+Carné+Goussainville" target="_blank">
-      🍸 Cocktail & Réception
+      🍸 Cocktail
     </a>
-    <a href="https://wa.me/?text=Bonjour%20😊%20Nous%20confirmons%20notre%20présence%20au%20mariage%20de%20Mike%20et%20Alice%20💍" target="_blank">
+    <a href="https://wa.me/?text=Bonjour%20😊%20Nous%20confirmons%20notre%20présence%20à%20votre%20mariage%20💍" target="_blank">
       💬 RSVP via WhatsApp
-    </a>
-    <a href="invitation.pdf" target="_blank">
-      📄 Ouvrir le faire-part (PDF)
     </a>
   </div>
 
@@ -182,29 +137,20 @@ body {
 <script>
 const card = document.getElementById("card");
 const buttons = document.getElementById("buttons");
-const petals = document.getElementById("petals");
+
+let buttonsTimerStarted = false;
 
 card.addEventListener("click", () => {
   card.classList.toggle("flipped");
-  buttons.style.display = "block";
 
-  // 🌸 génération pétales
-  petals.style.display = "block";
-  petals.innerHTML = "";
+  // ⏱ lancer le timer UNE SEULE FOIS
+  if (!buttonsTimerStarted) {
+    buttonsTimerStarted = true;
 
-  for (let i = 0; i < 22; i++) {
-    const petal = document.createElement("div");
-    petal.className = "petal";
-    petal.style.left = Math.random() * 100 + "%";
-    petal.style.animationDelay = Math.random() * 0.8 + "s";
-    petal.style.animationDuration = 3 + Math.random() * 2 + "s";
-    petal.style.transform += ` rotate(${Math.random() * 360}deg)`;
-    petals.appendChild(petal);
+    setTimeout(() => {
+      buttons.style.display = "block";
+    }, 15000); // 15 secondes
   }
-
-  setTimeout(() => {
-    petals.style.display = "none";
-  }, 4500);
 });
 </script>
 
