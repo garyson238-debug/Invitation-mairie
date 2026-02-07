@@ -24,22 +24,22 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.scene {
-  width: 100%;
-  height: 100%;
+.stack {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  perspective: 1800px;
 }
 
 /* 💌 CARTE */
+.scene {
+  perspective: 1800px;
+}
+
 .card {
   width: min(90vw, 420px);
   aspect-ratio: 2 / 3;
@@ -74,9 +74,17 @@ body {
   transform: rotateY(180deg);
 }
 
+/* ✨ TEXTE D’INDICATION */
+.hint {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #7b746b;
+  font-style: italic;
+}
+
 /* 💍 BOUTONS */
 .buttons {
-  margin-top: 24px;
+  margin-top: 18px;
   display: none;
 }
 
@@ -97,36 +105,37 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
-
-.hint {
-  margin-top: 12px;
-  font-size: 0.85rem;
-  color: #7b746b;
-  font-style: italic;
-}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <div class="scene">
-    <div class="card" id="card">
-      <div class="face front"></div>
-      <div class="face back"></div>
-      <div class="hint">Cliquez ou touchez le faire-part pour l’ouvrir</div>
+  <div class="stack">
+
+    <div class="scene">
+      <div class="card" id="card">
+        <div class="face front"></div>
+        <div class="face back"></div>
+      </div>
     </div>
-  </div>
-  <div class="buttons" id="buttons">
-    <a href="https://www.google.com/maps/search/?api=1&query=Mairie+de+Colombes+92700" target="_blank">
-      🏛 Mairie de Colombes
-    </a>
-    <a href="https://www.google.com/maps/search/?api=1&query=1+rue+Marcel+Carné+Goussainville" target="_blank">
-      🍸 Cocktail
-    </a>
-    <a href="https://wa.me/?text=Bonjour%20😊%20Nous%20confirmons%20notre%20présence%20à%20votre%20cérémonie%20de%20mariage%20civil%20💍" target="_blank">
-      💬 RSVP via WhatsApp
-    </a>
+
+    <div class="hint">
+      Cliquez ou touchez le faire-part pour l’ouvrir
+    </div>
+
+    <div class="buttons" id="buttons">
+      <a href="https://www.google.com/maps/search/?api=1&query=Mairie+de+Colombes+92700" target="_blank">
+        🏛 Mairie de Colombes
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=1+rue+Marcel+Carné+Goussainville" target="_blank">
+        🍸 Cocktail
+      </a>
+      <a href="https://wa.me/?text=Bonjour%20😊%20Nous%20confirmons%20notre%20présence%20à%20votre%20cérémonie%20de%20mariage%20civil%20💍" target="_blank">
+        💬 RSVP via WhatsApp
+      </a>
+    </div>
+
   </div>
 </div>
 
@@ -139,7 +148,6 @@ let buttonsTimerStarted = false;
 card.addEventListener("click", () => {
   card.classList.toggle("flipped");
 
-  // ⏱ lancer le timer UNE SEULE FOIS
   if (!buttonsTimerStarted) {
     buttonsTimerStarted = true;
 
@@ -152,7 +160,3 @@ card.addEventListener("click", () => {
 
 </body>
 </html>
-
-
-
-
